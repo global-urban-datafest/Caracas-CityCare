@@ -75,7 +75,7 @@ namespace CityCare.Areas.Service.Controllers
 
         public HttpResponseMessage AddReports()
         {
-
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }
