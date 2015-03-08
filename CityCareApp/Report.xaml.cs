@@ -13,21 +13,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace CityCareApp
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class Report : Page
     {
-        public MainPage()
+        public Report()
         {
             this.InitializeComponent();
-
-            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         /// <summary>
@@ -35,14 +32,18 @@ namespace CityCareApp
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        //protected override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //       NavigationService.Navigate(new Uri("/LoginUsername.xaml", UriKind.Relative));   
-        //}
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+        }
 
- 
+        private void TextBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
     }
 }
