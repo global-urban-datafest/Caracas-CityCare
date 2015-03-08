@@ -18,10 +18,14 @@ namespace CityCare.Areas.Service.Controllers
         IGenericRepository<CCUser> fUserRepository = new EntityFrameworkDataRepository<CCUser>(new CityCareEntities());
 
         
-            
+        /// <summary>
+        /// PostSomeData
+        /// </summary>
+        /// <param name="aRegisterUserModel"></param>
+        /// <returns></returns>
         [ResponseType(typeof(ResponseRegisterUserModel))]
         [HttpPost]
-         public HttpResponseMessage PostRegisterUser(RegisterUserModel aRegisterUserModel )
+        public HttpResponseMessage PostRegisterUser([FromBody]RegisterUserModel aRegisterUserModel)
         {
             IGenericRepository<UserIdType> fUserIdTypeRepository = new EntityFrameworkDataRepository<UserIdType>(new CityCareEntities());
 
@@ -53,8 +57,14 @@ namespace CityCare.Areas.Service.Controllers
             }
         }
 
+        /// <summary>
+        /// Get some data
+        /// </summary>
+        /// <param name="aUserAuthDataModel"></param>
+        /// <returns></returns>
+        [HttpPost]
         [ResponseType(typeof (ResponseAuthDataModel))]
-        public HttpResponseMessage GetValidateUser(UserAuthDataModel aUserAuthDataModel)
+        public HttpResponseMessage PostValidateUser(UserAuthDataModel aUserAuthDataModel)
         {
             try
             {
@@ -84,9 +94,15 @@ namespace CityCare.Areas.Service.Controllers
             }
         }
 
-        [ResponseType(typeof(ResponseReportDataModel))]
+
+        /// <summary>
+        ///Post some data
+        /// </summary>
+        /// <param name="aReportDataModels"></param>
+        /// <returns></returns>
         [HttpPost]
-        public HttpResponseMessage PostAddReports(List<ReportDataModel> aReportDataModels)
+        [ResponseType(typeof(ResponseReportDataModel))]
+        public HttpResponseMessage PostAddReports([FromBody]List<ReportDataModel> aReportDataModels)
         {
             try
             {
