@@ -177,6 +177,7 @@
     <Compile Include="Models\CCUser.cs">
       <DependentUpon>CityCare.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CCUserPartial.cs" />
     <Compile Include="Models\CertificationRequest.cs">
       <DependentUpon>CityCare.tt</DependentUpon>
     </Compile>
@@ -211,6 +212,7 @@
       <DependentUpon>CityCare.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\SecurityUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -291,6 +293,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\SignIn.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,7 +303,6 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Service\Models\" />
     <Folder Include="Areas\Service\Views\Shared\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
