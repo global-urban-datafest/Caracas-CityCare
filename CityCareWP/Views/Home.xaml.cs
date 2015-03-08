@@ -17,14 +17,17 @@ namespace CityCareWP.Views
             InitializeComponent();
         }
 
-        private void createReport_Click(object sender, RoutedEventArgs e)
+        private void createNewReport_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/Report.xaml", UriKind.Relative));
         }
 
-        private void signin_Click(object sender, RoutedEventArgs e)
+        private void checkPending_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Views/PendingReports.xaml", UriKind.Relative));
         }
+
+
+
     }
 }

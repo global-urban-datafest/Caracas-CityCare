@@ -1,0 +1,26 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="CityCareWP.Views.PendingReports"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid Background="#1FC2DE">
+        <Image Source="/Assets/images/Logo-care-movil.png" Margin="117,10,108,662"  />
+        <TextBlock Text="Pending reports sync" FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="336" Margin="73,111,71,607" FontFamily="Segoe WP"/>
+        <phone:LongListSelector HorizontalAlignment="Left" Height="501" Margin="10,178,0,0" VerticalAlignment="Top" Width="460"/>
+        <Button x:Name="syncNow" Background="Black" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="152,679,0,0" VerticalAlignment="Top" Width="181" Height="88">
+            <TextBlock Text="Sync now" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Light"  Foreground="White" Width="109"/>
+        </Button>
+    </Grid>
+
+</phone:PhoneApplicationPage>

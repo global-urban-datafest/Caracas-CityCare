@@ -107,6 +107,15 @@
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PendingReports.xaml.cs">
+      <DependentUpon>PendingReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PendReport.xaml.cs">
+      <DependentUpon>PendReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
@@ -121,6 +130,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PendingReports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PendReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,8 +169,10 @@
     </Content>
     <Content Include="Assets\BadgeLogo.png" />
     <Content Include="Assets\images\appStart.png" />
+    <Content Include="Assets\images\cameraIcon2.png" />
     <Content Include="Assets\images\Logo-care-movil.png" />
     <Content Include="Assets\images\Logocitycare.png" />
+    <Content Include="Assets\images\openFolder.png" />
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\SquareTile150x150.png" />

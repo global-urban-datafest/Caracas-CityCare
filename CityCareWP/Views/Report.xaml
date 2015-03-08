@@ -16,23 +16,26 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid Background="#1FC2DE">
-        <Image Source="/Assets/images/Logo-care-movil.png" Margin="117,10,108,662"  />
-        <TextBlock Text="Create Report " FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="232" Margin="135,111,113,610" FontFamily="Segoe WP"/>
-        <Image HorizontalAlignment="Left" Height="145" Margin="105,183,0,0" VerticalAlignment="Top" Width="203"/>
-        <Rectangle  HorizontalAlignment="Left"  Height="145" Margin="63,183,0,0" Stroke="Black" VerticalAlignment="Top" Width="351"/>
-        <TextBox HorizontalAlignment="Left" BorderBrush="#575757" Margin="48,342,0,0" TextWrapping="Wrap" Text="select a report type" VerticalAlignment="Top" Width="378"/>
+        <Image Source="/Assets/images/Logo-care-movil.png" Margin="117,2,108,670"  />
+        <TextBlock Text="Create Report " FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="232" Margin="124,92,124,629" FontFamily="Segoe WP"/>
 
-        <CheckBox Content="Propose report type" HorizontalAlignment="Left" Margin="90,414,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#575757" Background="White" BorderThickness="3" RenderTransformOrigin="0,0"  BorderBrush="#575757" Width="277"/>
-        <TextBox Text="write your proposition" BorderBrush="#B5EBF4" Background="Black" Foreground="White" Margin="48,419,0,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="378" Height="87"/>
-        <TextBox Text="write a report description ..." BorderBrush="#B5EBF4" Background="Black" Foreground="White" Margin="48,511,54,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" VerticalAlignment="Top" Height="138"/>
+        <TextBlock Name="takeAPicText" Text="Take a picture " FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="166" Margin="163,170,151,551" FontFamily="Segoe WP" MouseLeftButtonDown="takePicture_ButtonDown"/>
+        <Image Name="cameraIcon" Source="/Assets/images/cameraIcon2.png" Margin="186,225,192,481" MouseLeftButtonDown="takePicture_ButtonDown" />
 
-        <Button x:Name="cancel" Background="Black" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="148,654,0,0" VerticalAlignment="Top" Width="181" Height="88">
-            <TextBlock Text="Sign out" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Light"  Foreground="White" Width="109"/>
+        <Image Name="reportImage" HorizontalAlignment="Left" Height="164" Margin="63,156,0,0" VerticalAlignment="Top" Width="351" MouseLeftButtonDown="takePicture_ButtonDown" />
+        <!--<Rectangle Name="imageFrame"  HorizontalAlignment="Left"  Height="164" Margin="63,156,0,0" Stroke="Black" VerticalAlignment="Top" Width="351" MouseLeftButtonDown="takePicture_ButtonDown" MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"/>-->
+
+        <CheckBox Content="Propose report type" HorizontalAlignment="Left" Margin="52,378,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="Black" BorderThickness="3" RenderTransformOrigin="0,0"  BorderBrush="#B5EBF4" Width="277"/>
+        <TextBox Text="write your proposition" BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="52,432,0,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="378" Height="87"/>
+        <TextBox Text="write a report description ..." BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="52,519,50,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" VerticalAlignment="Top" Height="138"/>
+
+        <Button x:Name="cancel_Copy" Background="#425B68" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="148,657,0,0" VerticalAlignment="Top" Width="181" Height="88" Click="cancelClick">
+            <TextBlock Text="Cancel" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Light"  Foreground="White" Width="109"/>
         </Button>
 
         <!--to do Implement listpicker-->
 
-        <toolkit:ListPicker Name="wallets"  ItemsSource="{Binding _Wallets, ElementName=this}" ExpansionMode="FullScreenOnly" Margin="184,454,112,448" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" BorderBrush="#FF8D8D8D" Background="White" RenderTransformOrigin="0.465,0.818">
+        <toolkit:ListPicker Name="wallets"  ItemsSource="{Binding _Wallets, ElementName=this}" ExpansionMode="FullScreenOnly" Margin="63,325,66,380" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" BorderBrush="#B5EBF4" Background="Black" RenderTransformOrigin="0.465,0.818">
             <toolkit:ListPicker.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="17" Foreground="Black"></TextBlock>
@@ -44,6 +47,7 @@
                 </DataTemplate>
             </toolkit:ListPicker.FullModeItemTemplate>
         </toolkit:ListPicker>
+
     </Grid>
 
 </phone:PhoneApplicationPage>

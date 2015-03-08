@@ -29,6 +29,11 @@ namespace CityCareWP
             NavigationService.Navigate(new Uri("/Views/Home.xaml", UriKind.Relative));
         }
 
+        private void signup_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/Register.xaml", UriKind.Relative));
+        }
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 

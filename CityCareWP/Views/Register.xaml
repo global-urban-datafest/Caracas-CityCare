@@ -1,0 +1,39 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="CityCareWP.Views.Register"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid Background="#1FC2DE">
+        <Image Source="/Assets/images/Logo-care-movil.png" Margin="117,10,108,662"  />
+        <TextBlock Text="Sign up for a new account" FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="415" Margin="32,111,33,607" FontFamily="Segoe WP"/>
+        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="62,174,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="full name" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="371" Height="87" TextChanged="TextBox_TextChanged"/>
+        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="62,263,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="email" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="371" Height="87"/>
+        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="62,355,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="password" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="371" Height="84"/>
+        <Image HorizontalAlignment="Left" Height="191" Margin="76,454,0,0" VerticalAlignment="Top" Width="232"/>
+
+        <Rectangle  HorizontalAlignment="Left"  Height="191" Margin="76,454,0,0" Stroke="Black" VerticalAlignment="Top" Width="232"/>
+        <TextBlock TextAlignment="Center" FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="162" Margin="109,525,209,203" FontFamily="Segoe WP" Text="Avatar"/>
+        <Image Source="/Assets/images/cameraIcon2.png" Margin="329,476,83,246" RenderTransformOrigin="0.736,0.106"  />
+        <TextBlock TextAlignment="Center" FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="97" Margin="307,519,76,209" FontFamily="Segoe WP" Text="___________"/>
+        <Image Source="/Assets/images/openFolder.png" Margin="311,558,63,134" RenderTransformOrigin="0.736,0.106"  />
+
+        <Button x:Name="signup" Background="Black" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="62,664,0,0" VerticalAlignment="Top" Width="181" Height="88">
+            <TextBlock Text="Sign up" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Light"  Foreground="White" Width="109"/>
+        </Button>
+        <Button x:Name="cancel" Background="#425B68" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="252,664,0,0" VerticalAlignment="Top" Width="181" Height="88">
+            <TextBlock Text="Cancel" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Light"  Foreground="White" Width="109"/>
+        </Button>
+
+    </Grid>
+
+</phone:PhoneApplicationPage>
