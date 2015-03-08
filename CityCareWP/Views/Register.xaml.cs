@@ -21,5 +21,10 @@ namespace CityCareWP.Views
         {
 
         }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
     }
 }

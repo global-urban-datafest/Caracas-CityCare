@@ -37,6 +37,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\LoginSettings.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\ReportDataModel.cs" />
     <Compile Include="Models\ResponseAuthDataModel.cs" />

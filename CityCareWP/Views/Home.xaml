@@ -17,6 +17,7 @@
     <Grid Background="#1FC2DE">
         <Image Source="/Assets/images/Logo-care-movil.png" Margin="117,10,108,662"  />
         <TextBlock Text="Welcome " FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="149" Margin="92,111,239,607" FontFamily="Segoe WP"/>
+        <TextBlock Text="Jane Doe " FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="149" Margin="259,111,72,607" FontFamily="Segoe WP"/>
         <Image HorizontalAlignment="Left" Height="191" Margin="128,193,0,0" VerticalAlignment="Top" Width="232"/>
         <Rectangle  HorizontalAlignment="Left"  Height="191" Margin="128,193,0,0" Stroke="Black" VerticalAlignment="Top" Width="232"/>
         <Button x:Name="createReport" Background="Black" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="61,426,0,0" VerticalAlignment="Top" Width="362" Click="createNewReport_Click" Height="88">
@@ -25,7 +26,7 @@
         <Button x:Name="sync" Background="#425B68" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="61,519,0,0" VerticalAlignment="Top" Width="362" Click="checkPending_Click" Height="88">
             <TextBlock Text="Check pending to sync" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Light"  Foreground="White" Width="232"/>
         </Button>
-        <Button x:Name="signout" Background="Black" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="152,634,0,0" VerticalAlignment="Top" Width="181" Height="88">
+        <Button x:Name="signout" Background="Black" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="152,634,0,0" VerticalAlignment="Top" Width="181" Height="88" Click="signout_Click">
             <TextBlock Text="Sign out" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Light"  Foreground="White" Width="109"/>
         </Button>
     </Grid>
