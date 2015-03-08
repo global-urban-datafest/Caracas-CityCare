@@ -25,11 +25,12 @@
         <Image Name="reportImage" HorizontalAlignment="Left" Height="164" Margin="63,156,0,0" VerticalAlignment="Top" Width="351" MouseLeftButtonDown="takePicture_ButtonDown" />
         <!--<Rectangle Name="imageFrame"  HorizontalAlignment="Left"  Height="164" Margin="63,156,0,0" Stroke="Black" VerticalAlignment="Top" Width="351" MouseLeftButtonDown="takePicture_ButtonDown" MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"/>-->
 
-        <CheckBox Content="Propose report type" HorizontalAlignment="Left" Margin="52,378,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="Black" BorderThickness="3" RenderTransformOrigin="0,0"  BorderBrush="#B5EBF4" Width="277"/>
-        <TextBox Text="write your proposition" BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="52,432,0,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="378" Height="87"/>
-        <TextBox Text="write a report description ..." BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="52,519,50,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" VerticalAlignment="Top" Height="138"/>
+        <CheckBox Content="Propose report type" HorizontalAlignment="Left" Margin="52,372,0,0" VerticalAlignment="Top" FontSize="20" Foreground="Black" Background="Black" BorderThickness="3" RenderTransformOrigin="0,0"  BorderBrush="#B5EBF4" Width="277"/>
+        <TextBox Text="write your proposition" BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="52,432,0,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="378" Height="79"/>
+        <TextBox Text="write a report description ..." BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="52,500,50,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" VerticalAlignment="Top" Height="123"/>
+        <TextBox Text="funds" BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="52,610,0,0" TextAlignment="Center" TextWrapping="Wrap"  FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="378" Height="77"/>
 
-        <Button x:Name="cancel_Copy" Background="#425B68" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="148,657,0,0" VerticalAlignment="Top" Width="181" Height="88" Click="cancelClick">
+        <Button x:Name="cancel_Copy" Background="#425B68" HorizontalAlignment="Left" BorderBrush="#1FC2DE" Margin="148,681,0,-1" VerticalAlignment="Top" Width="181" Height="88" Click="cancelClick">
             <TextBlock Text="Cancel" TextAlignment="Center" HorizontalAlignment="Center" FontWeight="Light"  Foreground="White" Width="109"/>
         </Button>
 

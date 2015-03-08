@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -14,11 +15,27 @@
     shell:SystemTray.IsVisible="True">
 
     <Grid Background="#1FC2DE">
-        <Image Source="/Assets/images/Logo-care-movil.png" Margin="117,10,108,662"  />
-        <TextBlock Text="Sign up for a new account" FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="415" Margin="32,111,33,607" FontFamily="Segoe WP"/>
-        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="62,174,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="full name" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="371" Height="87" TextChanged="TextBox_TextChanged"/>
-        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="62,263,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="email" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="371" Height="87"/>
-        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="62,355,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="password" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="371" Height="84"/>
+        <Image Source="/Assets/images/Logo-care-movil.png" Margin="117,0,108,672"  />
+        <TextBlock Text="Sign up for a new account" FontSize="35" FontWeight="SemiBold" HorizontalAlignment="Center" FontStyle="Normal"  Foreground="Black" Width="415" Margin="32,83,33,635" FontFamily="Segoe WP"/>
+        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="49,130,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="full name" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="384" Height="87" TextChanged="TextBox_TextChanged"/>
+        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="49,207,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="email" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="384" Height="87"/>
+        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="49,287,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="password" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="384" Height="84"/>
+        <TextBox  BorderBrush="#B5EBF4" Background="Black" Foreground="#A0A0A0" Margin="137,367,0,0" TextAlignment="Center" TextWrapping="Wrap" Text="personal ID" FontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top" Width="296" Height="76"/>
+        <toolkit:ListPicker Name="wallets"  ItemsSource="{Binding _Wallets, ElementName=this}" ExpansionMode="FullScreenOnly" Margin="62,371,343,339" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" BorderBrush="#B5EBF4" Background="Black" RenderTransformOrigin="0.465,0.818">
+            <toolkit:ListPicker.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="17" Foreground="Black"></TextBlock>
+                </DataTemplate>
+            </toolkit:ListPicker.ItemTemplate>
+            <toolkit:ListPicker.FullModeItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="26" Foreground="#FFFFFF" Height="80"></TextBlock>
+                </DataTemplate>
+            </toolkit:ListPicker.FullModeItemTemplate>
+        </toolkit:ListPicker>
+
+
+
         <Image HorizontalAlignment="Left" Height="191" Margin="76,454,0,0" VerticalAlignment="Top" Width="232"/>
 
         <Rectangle  HorizontalAlignment="Left"  Height="191" Margin="76,454,0,0" Stroke="Black" VerticalAlignment="Top" Width="232"/>
