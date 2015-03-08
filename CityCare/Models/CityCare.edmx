@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CityCareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CCUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UserLevel" Type="int" Nullable="false" />
+          <Property Name="PersonalId" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PersonalIdTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsCertifierUser" Type="bit" Nullable="false" />
+          <Property Name="RequestGetCertified" Type="bit" Nullable="false" />
+          <Property Name="CertificationRequestId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="CertificationRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="Decription" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SiteAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReportTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="CCUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Funds" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsValid" Type="bit" Nullable="false" />
+          <Property Name="RejectReason" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ReportSolution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="StartDate" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EndDate" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ReportId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CCUserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Proposed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserIdType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CCUser_CertificationRequest">
+          <End Role="CertificationRequest" Type="Self.CertificationRequest" Multiplicity="0..1" />
+          <End Role="CCUser" Type="Self.CCUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertificationRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CCUser">
+              <PropertyRef Name="CertificationRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CCUser_UserIdType">
+          <End Role="UserIdType" Type="Self.UserIdType" Multiplicity="1" />
+          <End Role="CCUser" Type="Self.CCUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserIdType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CCUser">
+              <PropertyRef Name="PersonalIdTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_CCUser">
+          <End Role="CCUser" Type="Self.CCUser" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CCUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="CCUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_ReportType">
+          <End Role="ReportType" Type="Self.ReportType" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReportTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportSolution_CCUser">
+          <End Role="CCUser" Type="Self.CCUser" Multiplicity="1" />
+          <End Role="ReportSolution" Type="Self.ReportSolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CCUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReportSolution">
+              <PropertyRef Name="CCUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportSolution_Report">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="ReportSolution" Type="Self.ReportSolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReportSolution">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CityCareModelStoreContainer">
+          <EntitySet Name="CCUser" EntityType="Self.CCUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CertificationRequest" EntityType="Self.CertificationRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportSolution" EntityType="Self.ReportSolution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportState" EntityType="Self.ReportState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportType" EntityType="Self.ReportType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserIdType" EntityType="Self.UserIdType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CCUser_CertificationRequest" Association="Self.FK_CCUser_CertificationRequest">
+            <End Role="CertificationRequest" EntitySet="CertificationRequest" />
+            <End Role="CCUser" EntitySet="CCUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CCUser_UserIdType" Association="Self.FK_CCUser_UserIdType">
+            <End Role="UserIdType" EntitySet="UserIdType" />
+            <End Role="CCUser" EntitySet="CCUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_CCUser" Association="Self.FK_Report_CCUser">
+            <End Role="CCUser" EntitySet="CCUser" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_ReportType" Association="Self.FK_Report_ReportType">
+            <End Role="ReportType" EntitySet="ReportType" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportSolution_CCUser" Association="Self.FK_ReportSolution_CCUser">
+            <End Role="CCUser" EntitySet="CCUser" />
+            <End Role="ReportSolution" EntitySet="ReportSolution" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportSolution_Report" Association="Self.FK_ReportSolution_Report">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="ReportSolution" EntitySet="ReportSolution" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CityCareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CertificationRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="Decription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CCUser" Relationship="CityCareModel.FK_CCUser_CertificationRequest" FromRole="CertificationRequest" ToRole="CCUser" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReportTypeId" Type="Guid" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CCUserId" Type="Guid" Nullable="false" />
+          <Property Name="Funds" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <Property Name="RejectReason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReportType" Relationship="Self.FK_Report_ReportType" FromRole="Report" ToRole="ReportType" />
+          <NavigationProperty Name="ReportSolution" Relationship="Self.FK_ReportSolution_Report" FromRole="Report" ToRole="ReportSolution" />
+          <NavigationProperty Name="CCUser" Relationship="CityCareModel.FK_Report_CCUser" FromRole="Report" ToRole="CCUser" />
+        </EntityType>
+        <EntityType Name="ReportSolution">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartDate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EndDate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ReportId" Type="Guid" Nullable="false" />
+          <Property Name="CCUserId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_ReportSolution_Report" FromRole="ReportSolution" ToRole="Report" />
+          <NavigationProperty Name="CCUser" Relationship="CityCareModel.FK_ReportSolution_CCUser" FromRole="ReportSolution" ToRole="CCUser" />
+        </EntityType>
+        <EntityType Name="ReportState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Proposed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_Report_ReportType" FromRole="ReportType" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="UserIdType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CCUser" Relationship="CityCareModel.FK_CCUser_UserIdType" FromRole="UserIdType" ToRole="CCUser" />
+        </EntityType>
+        <Association Name="FK_Report_ReportType">
+          <End Role="ReportType" Type="Self.ReportType" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReportTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportSolution_Report">
+          <End Role="Report" Type="Self.Report" Multiplicity="1" />
+          <End Role="ReportSolution" Type="Self.ReportSolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReportSolution">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CityCareEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CertificationRequest" EntityType="Self.CertificationRequest" />
+          <EntitySet Name="Report" EntityType="Self.Report" />
+          <EntitySet Name="ReportSolution" EntityType="Self.ReportSolution" />
+          <EntitySet Name="ReportState" EntityType="Self.ReportState" />
+          <EntitySet Name="ReportType" EntityType="Self.ReportType" />
+          <EntitySet Name="UserIdType" EntityType="Self.UserIdType" />
+          <AssociationSet Name="FK_Report_ReportType" Association="Self.FK_Report_ReportType">
+            <End Role="ReportType" EntitySet="ReportType" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportSolution_Report" Association="Self.FK_ReportSolution_Report">
+            <End Role="Report" EntitySet="Report" />
+            <End Role="ReportSolution" EntitySet="ReportSolution" />
+          </AssociationSet>
+          <EntitySet Name="CCUser" EntityType="CityCareModel.CCUser" />
+          <AssociationSet Name="FK_CCUser_CertificationRequest" Association="CityCareModel.FK_CCUser_CertificationRequest">
+            <End Role="CertificationRequest" EntitySet="CertificationRequest" />
+            <End Role="CCUser" EntitySet="CCUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CCUser_UserIdType" Association="CityCareModel.FK_CCUser_UserIdType">
+            <End Role="UserIdType" EntitySet="UserIdType" />
+            <End Role="CCUser" EntitySet="CCUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_CCUser" Association="CityCareModel.FK_Report_CCUser">
+            <End Role="CCUser" EntitySet="CCUser" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportSolution_CCUser" Association="CityCareModel.FK_ReportSolution_CCUser">
+            <End Role="CCUser" EntitySet="CCUser" />
+            <End Role="ReportSolution" EntitySet="ReportSolution" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CCUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UserLevel" Type="Int32" Nullable="false" />
+          <Property Name="PersonalId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PersonalIdTypeId" Type="Guid" Nullable="false" />
+          <Property Name="IsCertifierUser" Type="Boolean" Nullable="false" />
+          <Property Name="RequestGetCertified" Type="Boolean" Nullable="false" />
+          <Property Name="CertificationRequestId" Type="Guid" />
+          <NavigationProperty Name="CertificationRequest" Relationship="CityCareModel.FK_CCUser_CertificationRequest" FromRole="CCUser" ToRole="CertificationRequest" />
+          <NavigationProperty Name="UserIdType" Relationship="CityCareModel.FK_CCUser_UserIdType" FromRole="CCUser" ToRole="UserIdType" />
+          <NavigationProperty Name="Report" Relationship="CityCareModel.FK_Report_CCUser" FromRole="CCUser" ToRole="Report" />
+          <NavigationProperty Name="ReportSolution" Relationship="CityCareModel.FK_ReportSolution_CCUser" FromRole="CCUser" ToRole="ReportSolution" />
+        </EntityType>
+        <Association Name="FK_CCUser_CertificationRequest">
+          <End Type="CityCareModel.CertificationRequest" Role="CertificationRequest" Multiplicity="0..1" />
+          <End Type="CityCareModel.CCUser" Role="CCUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertificationRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CCUser">
+              <PropertyRef Name="CertificationRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CCUser_UserIdType">
+          <End Type="CityCareModel.UserIdType" Role="UserIdType" Multiplicity="1" />
+          <End Type="CityCareModel.CCUser" Role="CCUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserIdType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CCUser">
+              <PropertyRef Name="PersonalIdTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_CCUser">
+          <End Type="CityCareModel.CCUser" Role="CCUser" Multiplicity="1" />
+          <End Type="CityCareModel.Report" Role="Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CCUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="CCUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportSolution_CCUser">
+          <End Type="CityCareModel.CCUser" Role="CCUser" Multiplicity="1" />
+          <End Type="CityCareModel.ReportSolution" Role="ReportSolution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CCUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReportSolution">
+              <PropertyRef Name="CCUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CityCareModelStoreContainer" CdmEntityContainer="CityCareEntities">
+          <EntitySetMapping Name="CertificationRequest">
+            <EntityTypeMapping TypeName="CityCareModel.CertificationRequest">
+              <MappingFragment StoreEntitySet="CertificationRequest">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report">
+            <EntityTypeMapping TypeName="CityCareModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SiteAddress" ColumnName="SiteAddress" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ReportTypeId" ColumnName="ReportTypeId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CCUserId" ColumnName="CCUserId" />
+                <ScalarProperty Name="Funds" ColumnName="Funds" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportSolution">
+            <EntityTypeMapping TypeName="CityCareModel.ReportSolution">
+              <MappingFragment StoreEntitySet="ReportSolution">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="CCUserId" ColumnName="CCUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportState">
+            <EntityTypeMapping TypeName="CityCareModel.ReportState">
+              <MappingFragment StoreEntitySet="ReportState">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportType">
+            <EntityTypeMapping TypeName="CityCareModel.ReportType">
+              <MappingFragment StoreEntitySet="ReportType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Proposed" ColumnName="Proposed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserIdType">
+            <EntityTypeMapping TypeName="CityCareModel.UserIdType">
+              <MappingFragment StoreEntitySet="UserIdType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CCUser">
+            <EntityTypeMapping TypeName="CityCareModel.CCUser">
+              <MappingFragment StoreEntitySet="CCUser">
+                <ScalarProperty Name="CertificationRequestId" ColumnName="CertificationRequestId" />
+                <ScalarProperty Name="RequestGetCertified" ColumnName="RequestGetCertified" />
+                <ScalarProperty Name="IsCertifierUser" ColumnName="IsCertifierUser" />
+                <ScalarProperty Name="PersonalIdTypeId" ColumnName="PersonalIdTypeId" />
+                <ScalarProperty Name="PersonalId" ColumnName="PersonalId" />
+                <ScalarProperty Name="UserLevel" ColumnName="UserLevel" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
