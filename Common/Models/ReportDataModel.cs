@@ -7,14 +7,22 @@ namespace Common.Models
 {
     public class ReportDataModel
     {
-        public string SiteAddress { get; set; }
+        public double Latitud { get; set; }
+
+        public double Longitud { get; set; }
+
         public byte[] Image { get; set; }
+
         public string Description { get; set; }
-        public System.Guid ReportTypeId { get; set; }
-        public System.DateTime Date { get; set; }
-        public System.Guid CCUserId { get; set; }
+
+        public Guid ReportTypeId { get; set; }
+
+        public string ProposedReportType { get; set; }
+
+        public Guid CCUserId { get; set; }
+
         public Nullable<decimal> Funds { get; set; }
-        public bool IsValid { get; set; }
-        public string RejectReason { get; set; }
+
+        public string ErrorAddingReport { get; set; }
     }
 }

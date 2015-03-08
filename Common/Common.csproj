@@ -39,6 +39,10 @@
   <ItemGroup>
     <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\ReportDataModel.cs" />
+    <Compile Include="Models\ResponseAuthDataModel.cs" />
+    <Compile Include="Models\ResponseBaseModel.cs" />
+    <Compile Include="Models\ResponseRegisterUserModel.cs" />
+    <Compile Include="Models\ResponseReportDataModel.cs" />
     <Compile Include="Models\UserAuthDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

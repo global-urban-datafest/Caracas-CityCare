@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using CityCare.Areas.Service.Models;
 using CityCare.Models;
 using Common.Models;
 using FORCOUtils;
@@ -15,14 +14,17 @@ namespace CityCare.Areas.Service.Controllers
 {
     public class CCUserController : ApiController
     {
-        IGenericRepository<CCUser> fUserRepository = new EntityFrameworkDataRepository<CCUser>(new CityCareEntities());
-        IGenericRepository<UserIdType> fUserIdTypeRepository = new EntityFrameworkDataRepository<UserIdType>(new CityCareEntities());
         
+        IGenericRepository<CCUser> fUserRepository = new EntityFrameworkDataRepository<CCUser>(new CityCareEntities());
 
-
-        [ResponseType(typeof(RequestResponseModel))]
-         public HttpResponseMessage RegisterUser(RegisterUserModel aRegisterUserModel )
+        
+            
+        [ResponseType(typeof(ResponseRegisterUserModel))]
+        [HttpPost]
+         public HttpResponseMessage PostRegisterUser(RegisterUserModel aRegisterUserModel )
         {
+            IGenericRepository<UserIdType> fUserIdTypeRepository = new EntityFrameworkDataRepository<UserIdType>(new CityCareEntities());
+
             try
             {
                 //todo add validations
@@ -40,42 +42,164 @@ namespace CityCare.Areas.Service.Controllers
                 fUserRepository.Add(_NewUser);
                 return Request.CreateResponse(HttpStatusCode.Created);
             }
-            catch (Exception)
+            catch (Exception aException)
             {
-                var _ResponseStatus = new RequestResponseModel
+                var _Response = new ResponseRegisterUserModel
                 {
-                    Status = ResponseStatus.Error,
-                    ErroMessage = "Error creating the user, please try again."
+                    IsRegistered = false,
+                    ErroMessage = aException.Message
                 };
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, _ResponseStatus);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, _Response);
             }
         }
 
-        [ResponseType(typeof (RequestResponseModel))]
-        public HttpResponseMessage ValidateUser(UserAuthDataModel aUserAuthDataModel)
+        [ResponseType(typeof (ResponseAuthDataModel))]
+        public HttpResponseMessage GetValidateUser(UserAuthDataModel aUserAuthDataModel)
         {
             try
             {
-                if (fUserRepository.GetSingleLazyLoading(aUser => aUser.Email == aUserAuthDataModel.Email && aUser.Email == aUserAuthDataModel.Password) != null)
+                var _UserByEmailAndPass =
+                    fUserRepository.GetSingleLazyLoading(
+                        aUser => aUser.Email == aUserAuthDataModel.Email && aUser.Email == aUserAuthDataModel.Password);
+                if (_UserByEmailAndPass != null)
                 {
-                    return new HttpResponseMessage(HttpStatusCode.OK);
+                    var _Response = new ResponseAuthDataModel
+                    {
+                        IsValidData = false,
+                        fUserId = _UserByEmailAndPass.Id
+                    };
+                    return Request.CreateResponse(HttpStatusCode.OK, _Response);
                 }
+
                 return new HttpResponseMessage(HttpStatusCode.Unauthorized);
             }
-            catch (Exception)
+            catch (Exception aException)
             {
-                var _ResponseStatus = new RequestResponseModel
+                var _Response = new ResponseAuthDataModel
                 {
-                    Status = ResponseStatus.Error,
-                    ErroMessage = "Error creating the user, please try again."
+                    IsValidData = false,
+                    ErroMessage = aException.Message
                 };
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, _ResponseStatus);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, _Response);
             }
         }
 
-        public HttpResponseMessage AddReports()
+        [ResponseType(typeof(ResponseReportDataModel))]
+        [HttpPost]
+        public HttpResponseMessage PostAddReports(List<ReportDataModel> aReportDataModels)
         {
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            try
+            {
+                
+                IGenericRepository<Report> fUserReportRepository = new EntityFrameworkDataRepository<Report>(new CityCareEntities(),false);
+
+
+                //var _Response = new ResponseReportDataModel
+                //{
+                //    fAreReportsInvalid = false,
+                //    fReportModels = new List<ReportDataModel>()
+                //};
+
+                foreach (var _ReportDataModel in aReportDataModels)
+                {
+                    if (!string.IsNullOrEmpty(_ReportDataModel.ProposedReportType))
+                    {
+
+
+                        var _NewReport = new Report
+                        {
+                            CCUserId = _ReportDataModel.CCUserId,
+                            Date = DateTime.Now,
+                            Description = _ReportDataModel.Description,
+                            Funds = _ReportDataModel.Funds,
+                            IsValid = false,
+                            Image = _ReportDataModel.Image,
+                            ReportType = new ReportType
+                            {
+                                Name = _ReportDataModel.ProposedReportType,
+                                Proposed = true
+                            },
+                            SiteAddress = _ReportDataModel.Latitud + "|" + _ReportDataModel.Latitud,
+
+                        };
+                        fUserReportRepository.Add(_NewReport);
+
+                    }
+                    else
+                    {
+                        var _NewReport = new Report
+                        {
+                            CCUserId = _ReportDataModel.CCUserId,
+                            Date = DateTime.Now,
+                            Description = _ReportDataModel.Description,
+                            Funds = _ReportDataModel.Funds,
+                            IsValid = false,
+                            Image = _ReportDataModel.Image,
+                            ReportTypeId = _ReportDataModel.ReportTypeId,
+                            SiteAddress = _ReportDataModel.Latitud + "|" + _ReportDataModel.Latitud,
+
+                        };
+                        fUserReportRepository.Add(_NewReport);
+                    }
+                }
+                var _Response = new ResponseReportDataModel
+                {
+                    fAreReportsInvalid = false
+                };
+                
+                (fUserReportRepository as EntityFrameworkDataRepository<Report>).DisposeContext();
+                return Request.CreateResponse(HttpStatusCode.OK, _Response);
+            }
+            catch (Exception aException)
+            {
+                var _Response = new ResponseReportDataModel
+                {
+                    fAreReportsInvalid = true,
+                    ErroMessage = aException.Message
+                };
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, _Response);
+            }
+            
+
+
+            //TODO improve using this code
+            /*foreach (var _ReportDataModel in aReportDataModels)
+            {
+                try
+                {
+
+                    if (!string.IsNullOrEmpty(_ReportDataModel.ProposedReportType))
+                    {
+                        
+
+                        var _NewReport = new Report
+                        {
+                            CCUserId = _ReportDataModel.CCUserId,
+                            Date = DateTime.Now,
+                            Description = _ReportDataModel.Description,
+                            Funds = _ReportDataModel.Funds,
+                            IsValid = false,
+                            Image = _ReportDataModel.Image,
+                            ReportType = new ReportType
+                            {
+                                Name = _ReportDataModel.ProposedReportType,
+                                Proposed = true
+                            },
+                            SiteAddress = _ReportDataModel.Latitud + "|" + _ReportDataModel.Latitud,
+                            
+                        };
+                        fUserReportRepository.Add(_NewReport);
+
+                    }
+                }
+                catch (Exception aException)
+                {
+                    _ReportDataModel.ErrorAddingReport = aException.Message;
+                    _Response.fReportModels.Add(_ReportDataModel);
+
+                }
+            }*/
+            
         }
     }
 }
